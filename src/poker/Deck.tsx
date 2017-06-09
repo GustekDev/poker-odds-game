@@ -1,4 +1,28 @@
-import { Card } from "./types"
+
+const enum Suit { HEARTHS, DIAMONDS, CLUBS, SPADES }
+const enum Rank { 
+    RANK_1,  
+    RANK_2,
+    RANK_3,
+    RANK_4,
+    RANK_5,
+    RANK_6,
+    RANK_7,
+    RANK_8,
+    RANK_9,
+    RANK_10,
+    RANK_JACK,
+    RANK_QUEEN,
+    RANK_KING,
+    RANK_ACE
+}
+const suits = [Suit.HEARTHS, Suit.DIAMONDS, Suit.CLUBS, Suit.SPADES]
+const ranks = [Rank.RANK_1, Rank.RANK_2, Rank.RANK_3]
+
+interface Card {
+    suit: Suit
+    rank: Rank
+}
 
 export default class Deck {
 
@@ -9,8 +33,8 @@ export default class Deck {
     }
 
     reset() {
-        for (let suit in ["Hearths", "Diamonds", "Clubs", "Spades"]) {
-            for (let rank in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"])
+        for (let suit of suits) {
+            for (let rank of ranks)
                 this.cards.push({ suit, rank })
         }
     }
