@@ -1,40 +1,23 @@
-
-const enum Suit { HEARTHS, DIAMONDS, CLUBS, SPADES }
-const enum Rank { 
-    RANK_1,  
-    RANK_2,
-    RANK_3,
-    RANK_4,
-    RANK_5,
-    RANK_6,
-    RANK_7,
-    RANK_8,
-    RANK_9,
-    RANK_10,
-    RANK_JACK,
-    RANK_QUEEN,
-    RANK_KING,
-    RANK_ACE
-}
-const suits = [Suit.HEARTHS, Suit.DIAMONDS, Suit.CLUBS, Suit.SPADES]
-const ranks = [Rank.RANK_1, Rank.RANK_2, Rank.RANK_3]
-
-interface Card {
-    suit: Suit
-    rank: Rank
-}
+import { Card, Suit, Rank } from "./types"
 
 export default class Deck {
 
-    private cards: Card[]
+
+    private suits = [Suit.HEARTHS, Suit.DIAMONDS, Suit.CLUBS, Suit.SPADES]
+    private ranks = [
+        Rank.RANK_1, Rank.RANK_2, Rank.RANK_3, Rank.RANK_4, Rank.RANK_5, Rank.RANK_6, Rank.RANK_7,
+        Rank.RANK_8, Rank.RANK_9, Rank.RANK_10, Rank.RANK_JACK, Rank.RANK_QUEEN, Rank.RANK_KING, Rank.RANK_ACE
+    ]
+
+    private cards: Card[] = [];
 
     constructor() {
         this.reset()
     }
 
     reset() {
-        for (let suit of suits) {
-            for (let rank of ranks)
+        for (let suit of this.suits) {
+            for (let rank of this.ranks)
                 this.cards.push({ suit, rank })
         }
     }
