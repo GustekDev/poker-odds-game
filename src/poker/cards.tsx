@@ -14,6 +14,10 @@ export const displayCard = (card: Card) => {
     )
 }
 
+export const shortCard = (card: Card) => {
+    return displayRank(card.rank) + shortSuit(card.suit) 
+}
+
 export const displayCards = (cards: Card[]) => {
     return (<div className="playingCards simpleCards">{cards.map(displayCard)}</div>)
 }
@@ -24,6 +28,16 @@ const displaySuit = (s: Suit) => {
         case Suit.DIAMONDS: return "\u2666"
         case Suit.CLUBS: return "\u2663"
         case Suit.SPADES: return "\u2660"
+    }
+    return "U"
+}
+
+const shortSuit = (s: Suit) => {
+    switch (s) {
+        case Suit.HEARTHS: return "h"
+        case Suit.DIAMONDS: return "d"
+        case Suit.CLUBS: return "c"
+        case Suit.SPADES: return "s"
     }
     return "U"
 }
@@ -40,7 +54,6 @@ const suitClass = (s: Suit) => {
 
 const displayRank = (r: Rank) => {
     switch (r) {
-        case Rank.RANK_1: return "1"
         case Rank.RANK_2: return "2"
         case Rank.RANK_3: return "3"
         case Rank.RANK_4: return "4"
@@ -60,7 +73,6 @@ const displayRank = (r: Rank) => {
 
 const rankClass = (r: Rank) => {
     switch (r) {
-        case Rank.RANK_1: return "rank-1"
         case Rank.RANK_2: return "rank-2"
         case Rank.RANK_3: return "rank-3"
         case Rank.RANK_4: return "rank-4"

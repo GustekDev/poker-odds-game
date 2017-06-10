@@ -3396,6 +3396,10 @@ pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
 
+pokersolver@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/pokersolver/-/pokersolver-2.1.2.tgz#06ff3c0cd6b2850fa89e60dda46fe52c1bb15e2f"
+
 portfinder@^1.0.9:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.13.tgz#bb32ecd87c27104ae6ee44b5a3ccbf0ebb1aede9"
