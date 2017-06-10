@@ -16,7 +16,7 @@ export const dealCards = (turn: GameTurn): Cards => {
     }
 }
 
-const getNewDeck = (): Card[] => {
+export const getNewDeck = (): Card[] => {
     let cards: Card[] = [];
     for (let suit of suits) {
         for (let rank of ranks)
