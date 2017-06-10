@@ -45,4 +45,10 @@ interface Card {
     rank: Rank
 }
 
+interface Cards {
+    community: Card[];
+    player: Card[];
+    remaining: Card[];
+}
+
 
