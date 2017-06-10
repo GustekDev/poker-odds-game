@@ -31,8 +31,33 @@ export default class GameComponent extends React.Component<Props, State> {
         })
     }
 
+    setTurn(turn: GameTurn) {
+        this.setState((prev: State) => {
+            return R.merge(prev, { gameTurn: turn })
+        })
+    }
+
+    renderTurnRadios(curr: GameTurn): JSX.Element[] {
+        let turns = [
+            {turn: GameTurn.FLOP, label: "Flop", checked: curr == GameTurn.FLOP},
+            {turn: GameTurn.TURN, label: "Turn", checked: curr == GameTurn.TURN},
+            {turn: GameTurn.RIVER, label: "River", checked: curr == GameTurn.RIVER},
+        ]
+        return turns.map( (turn) => {
+        return (<label><input
+            type="radio"
+            name="turn"
+            checked={turn.checked}
+            value={turn.turn}
+            onClick={() => this.setTurn(turn.turn) }/>{turn.label}</label>)
+        })
+    }
+
     render() {
         return (<div>
+            <div>
+                {this.renderTurnRadios(this.state.gameTurn)}
+            </div>
             <button onClick={() => this.dealNewCards()}>Deal</button>
             <Table community={this.state.cards.community} player={this.state.cards.player} />
         </div>)
