@@ -1,7 +1,6 @@
 declare module "pokersolver"
 
-
-interface PokerHand {
+interface SolverHand {
     name: string;
     descr: string;
     rank: number;

@@ -15,6 +15,26 @@ export const enum Rank {
     RANK_ACE
 }
 
+export const enum HandRank {
+    HIGH_CARD,
+    PAIR,
+    TWO_PAIRS,
+    THREEE_OF_KIND,
+    STRAIGHT,
+    FLUSH,
+    FULL_HOUSE,
+    FOUR_OF_KIND,
+    STRAIGHT_FLUSH
+}
+
+
+interface PokerHand {
+    name: string;
+    description: string;
+    rank: number;
+    handRank: HandRank
+}
+
 interface Card {
     suit: Suit
     rank: Rank

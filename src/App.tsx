@@ -13,7 +13,7 @@ class App extends React.Component<{}, null> {
   render() {
     let deck = new Deck()
     deck.shuffle()
-    let community = deck.deal(3)
+    let community = deck.deal(5)
     let hand = deck.deal(2)
     let rank = evaluate(community.concat(hand))
     return (
@@ -25,9 +25,8 @@ class App extends React.Component<{}, null> {
         <p className="App-intro">
           <Table community={community} hand={hand} />
           Best: {rank.name}
-          <br />Desc: {rank.descr}
-          <br />CArds: {rank.cards.join()}
-          <br />Cards pool: {rank.cardPool.join()}
+          <br />Desc: {rank.description}
+          <br />HandRank: {rank.handRank}
           {displayCards(getOuts(community, hand, deck))}
         </p>
       </div>
