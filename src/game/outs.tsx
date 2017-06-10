@@ -1,6 +1,7 @@
 import * as R from "ramda"
 import { evaluate } from "../poker/evaluator"
 import { Card, HandRank } from "../poker/types"
+// import { shortCard } from "../poker/cards"
 
 export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[]): Card[] => {
     let allCards = community.concat(hand)
@@ -13,8 +14,8 @@ export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[])
         if (noPair(community)) {
             var outs = [];
             for (let card of remainingCards) {
-                let newCommunity = R.append(card, allCards)
-                let rank = evaluate(newCommunity)
+                let newCommunity = R.append(card, community)
+                let rank = evaluate(newCommunity.concat(hand))
                 if ((rank.handRank == HandRank.TWO_PAIRS && noPair(newCommunity))
                  || rank.handRank == HandRank.THREEE_OF_KIND) {
                     outs.push(card)
@@ -39,7 +40,7 @@ export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[])
 }
 
 const noPair = (cards: Card[]): boolean => {
-    return R.uniq(cards.map((c) => c.rank)).length == cards.length
+    return R.uniq(cards.map((c) => c.rank)).length == cards.length;
 }
 
 const checkForStraights = (community: Card[], hand: Card[], remainingCards: Card[]): Card[] => {

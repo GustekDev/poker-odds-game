@@ -15,12 +15,12 @@ describe("Outs counter", () => {
         runTest(community, player, expectedOuts)
     })
 
-    // it("should return 5 outs for pair, to make set or 2 pairs", () => {
-    //     let community = cardsFromShort([ "Th", "4c", "Qd" ])
-    //     let player = cardsFromShort(["Tc", "8h"])
-    //     let expectedOuts = cardsFromShort([ "Td", "Ts", "8c", "8d", "8s"])
-    //     runTest(community, player, expectedOuts)
-    // })
+    it("should return 5 outs for pair, to make set or 2 pairs", () => {
+        let community = cardsFromShort([ "Th", "4c", "Qd" ])
+        let player = cardsFromShort(["Tc", "8h"])
+        let expectedOuts = cardsFromShort([ "Td", "Ts", "8c", "8d", "8s"])
+        runTest(community, player, expectedOuts)
+    })
 
     it("should return valid 4 cards for inside straight", () => {
         let community = cardsFromShort(["4h", "7c", "As", "Jh"])

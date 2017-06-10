@@ -22,6 +22,10 @@ export const displayCards = (cards: Card[]) => {
     return (<div className="playingCards simpleCards">{cards.map(displayCard)}</div>)
 }
 
+export const displayShortCards = (cards: Card[]) => {
+    return cards.map(shortCard)
+}
+
 const displaySuit = (s: Suit) => {
     switch (s) {
         case Suit.HEARTHS: return "\u2665"
@@ -62,7 +66,7 @@ const displayRank = (r: Rank) => {
         case Rank.RANK_7: return "7"
         case Rank.RANK_8: return "8"
         case Rank.RANK_9: return "9"
-        case Rank.RANK_10: return "10"
+        case Rank.RANK_10: return "T"
         case Rank.RANK_JACK: return "J"
         case Rank.RANK_QUEEN: return "Q"
         case Rank.RANK_KING: return "K"
