@@ -1,8 +1,8 @@
 import * as R from "ramda"
-import { getOuts } from "../../src/game/outs"
-import { Rank, Suit } from "../../src/poker/types"
-import { getNewDeck } from "../../src/poker/dealer"
-import { sortCards } from "../../src/poker/cards"
+import { getOuts } from "../../game/outs"
+import { Rank, Suit } from "../../poker/types"
+import { getNewDeck } from "../../poker/dealer"
+import { sortCards } from "../../poker/cards"
 import * as A from "assert"
 
 
