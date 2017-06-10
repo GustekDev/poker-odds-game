@@ -3,7 +3,6 @@ import { getOuts } from "../../game/outs"
 import { getNewDeck } from "../../poker/dealer"
 import { cardsFromShort } from "../../poker/cards"
 import { Card } from "../../poker/types"
-// import { assert as A } from "chai"
 import { expect } from "chai"
 
 
