@@ -9,9 +9,27 @@ export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[])
         let isOut = (card: Card) => card.rank == hand[0].rank
         return R.filter(isOut, remainingCards)
     }
+    if (handRank.handRank < HandRank.STRAIGHT) {
+        let straightOuts = checkForStraights(community, hand, remainingCards)
+        if (straightOuts.length > 0) {
+            return straightOuts
+        }
+    }
     var outs = [];
     for (let card of remainingCards) {
         if (evaluate(R.append(card, allCards)).rank > handRank.rank) {
+            outs.push(card)
+        }
+    }
+    return outs;
+}
+
+const checkForStraights = (community: Card[], hand: Card[], remainingCards: Card[]): Card[] => {
+    let allCards = community.concat(hand)
+    var outs = [];
+    for (let card of remainingCards) {
+        let rank = evaluate(R.append(card, allCards))
+        if (rank.handRank == HandRank.STRAIGHT) {
             outs.push(card)
         }
     }

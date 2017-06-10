@@ -1,6 +1,6 @@
 export const enum Suit { HEARTHS, DIAMONDS, CLUBS, SPADES }
 export const enum Rank { 
-    RANK_2,
+    RANK_2 = 2,
     RANK_3,
     RANK_4,
     RANK_5,

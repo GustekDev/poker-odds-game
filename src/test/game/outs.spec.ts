@@ -3,7 +3,8 @@ import { getOuts } from "../../game/outs"
 import { getNewDeck } from "../../poker/dealer"
 import { cardsFromShort } from "../../poker/cards"
 import { Card } from "../../poker/types"
-import { assert as A } from "chai"
+// import { assert as A } from "chai"
+import { expect } from "chai"
 
 
 describe("Outs counter", () => {
@@ -11,7 +12,7 @@ describe("Outs counter", () => {
     it("should return remaing two cards for pocket pair", () => {
         let community = cardsFromShort([ "Th", "4c", "Qd" ])
         let player = cardsFromShort(["8c", "8h"])
-        let expectedOuts = cardsFromShort([ "8d", "8s"])
+        let expectedOuts = cardsFromShort([ "8s", "8d"])
         runTest(community, player, expectedOuts)
     })
 
@@ -34,5 +35,5 @@ describe("Outs counter", () => {
 const runTest = (community: Card[], player: Card[], expectedOuts: Card[]) => {
     let remainingCards = R.difference(getNewDeck(), community.concat(player))
     let outs = getOuts(community, player, remainingCards)
-    A.deepEqual(outs, expectedOuts)
+    expect(outs).to.have.deep.members(expectedOuts)
 }
