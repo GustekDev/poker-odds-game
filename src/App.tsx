@@ -1,9 +1,11 @@
 import * as React from 'react';
 import Deck from "./poker/Deck"
-import { displayCards } from "./poker/cards"
 import './App.css';
 import "./poker/cards.css"
 import { evaluate } from "./poker/evaluator"
+import Table from "./poker/Table"
+import { getOuts } from "./game/outs"
+import { displayCards } from "./poker/cards"
 
 const logo = require('./logo.svg');
 
@@ -21,12 +23,12 @@ class App extends React.Component<{}, null> {
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
-          Community: {displayCards(community)}
-          Your cards: {displayCards(hand)}
+          <Table community={community} hand={hand} />
           Best: {rank.name}
           <br />Desc: {rank.descr}
           <br />CArds: {rank.cards.join()}
           <br />Cards pool: {rank.cardPool.join()}
+          {displayCards(getOuts(community, hand, deck))}
         </p>
       </div>
     );

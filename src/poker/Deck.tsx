@@ -47,4 +47,8 @@ export default class Deck {
         this.cards = this.cards.slice(n)
         return deal;
     }
+
+    remainingCards(): Card[] {
+        return this.cards;
+    }
 }
