@@ -15,10 +15,17 @@ describe("Outs counter", () => {
         runTest(community, player, expectedOuts)
     })
 
-    it("should return 4 cards for inside straight", () => {
+    it("should return valid 4 cards for inside straight", () => {
         let community = cardsFromShort(["4h", "7c", "As", "Jh"])
         let player = cardsFromShort(["5s", "8d"])
         let expectedOuts = cardsFromShort(["6d", "6h", "6c", "6s"])
+        runTest(community, player, expectedOuts)
+    })
+
+    it("should return valid 8 cards for outside straight", () => {
+        let community = cardsFromShort(["4h", "7c", "As", "Jh"])
+        let player = cardsFromShort(["5s", "6d"])
+        let expectedOuts = cardsFromShort(["3d", "3h", "3c", "3s", "8d", "8h", "8c", "8s"])
         runTest(community, player, expectedOuts)
     })
 })
