@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as R from "ramda"
 import { Card, Rank, Suit } from "./types"
 import * as classNames from "classnames"
 
@@ -117,15 +116,6 @@ const rankClass = (r: Rank) => {
         case Rank.RANK_ACE: return "rank-a"
     }
     throw new RangeError("Invalid rank: " + r)
-}
-
-export const sortCards = (cards: Card[]) => {
-    R.sort((c1: Card, c2: Card) => {
-        if (c1.rank == c2.rank) {
-            return c1.suit - c2.suit;
-        }
-        return c1.rank - c2.rank;
-    })(cards)
 }
 
 export const cardFromShort = (short: string): Card => {

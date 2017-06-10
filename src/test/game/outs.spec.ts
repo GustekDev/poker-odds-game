@@ -1,7 +1,7 @@
 import * as R from "ramda"
 import { getOuts } from "../../game/outs"
 import { getNewDeck } from "../../poker/dealer"
-import { sortCards, cardsFromShort } from "../../poker/cards"
+import { cardsFromShort } from "../../poker/cards"
 import { Card } from "../../poker/types"
 import * as A from "assert"
 
@@ -34,5 +34,5 @@ describe("Outs counter", () => {
 const runTest = (community: Card[], player: Card[], expectedOuts: Card[]) => {
     let remainingCards = R.difference(getNewDeck(), community.concat(player))
     let outs = getOuts(community, player, remainingCards)
-    A.equal(sortCards(outs), sortCards(expectedOuts))
+    A.ok(R.equals(outs, expectedOuts))
 }
