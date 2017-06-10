@@ -5,9 +5,23 @@ import { Card, HandRank } from "../poker/types"
 export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[]): Card[] => {
     let allCards = community.concat(hand)
     let handRank = evaluate(allCards)
-    if (handRank.handRank == HandRank.PAIR && isPocketPair(hand)) {
-        let isOut = (card: Card) => card.rank == hand[0].rank
-        return R.filter(isOut, remainingCards)
+    if (handRank.handRank == HandRank.PAIR) {
+        if (isPocketPair(hand)) {
+            let isOut = (card: Card) => card.rank == hand[0].rank
+            return R.filter(isOut, remainingCards)
+        }
+        if (noPair(community)) {
+            var outs = [];
+            for (let card of remainingCards) {
+                let newCommunity = R.append(card, allCards)
+                let rank = evaluate(newCommunity)
+                if ((rank.handRank == HandRank.TWO_PAIRS && noPair(newCommunity))
+                 || rank.handRank == HandRank.THREEE_OF_KIND) {
+                    outs.push(card)
+                }
+            }
+            return outs;
+        }
     }
     if (handRank.handRank < HandRank.STRAIGHT) {
         let straightOuts = checkForStraights(community, hand, remainingCards)
@@ -22,6 +36,10 @@ export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[])
         }
     }
     return outs;
+}
+
+const noPair = (cards: Card[]): boolean => {
+    return R.uniq(cards.map((c) => c.rank)).length == cards.length
 }
 
 const checkForStraights = (community: Card[], hand: Card[], remainingCards: Card[]): Card[] => {
