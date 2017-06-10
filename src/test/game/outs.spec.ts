@@ -3,7 +3,7 @@ import { getOuts } from "../../game/outs"
 import { getNewDeck } from "../../poker/dealer"
 import { cardsFromShort } from "../../poker/cards"
 import { Card } from "../../poker/types"
-import * as A from "assert"
+import { assert as A } from "chai"
 
 
 describe("Outs counter", () => {
@@ -34,5 +34,5 @@ describe("Outs counter", () => {
 const runTest = (community: Card[], player: Card[], expectedOuts: Card[]) => {
     let remainingCards = R.difference(getNewDeck(), community.concat(player))
     let outs = getOuts(community, player, remainingCards)
-    A.ok(R.equals(outs, expectedOuts))
+    A.deepEqual(outs, expectedOuts)
 }
