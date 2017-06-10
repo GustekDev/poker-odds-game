@@ -27,6 +27,11 @@ export const enum HandRank {
     STRAIGHT_FLUSH
 }
 
+export const enum GameTurn {
+    FLOP,
+    TURN,
+    RIVER
+} 
 
 interface PokerHand {
     name: string;

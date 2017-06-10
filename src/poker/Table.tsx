@@ -6,7 +6,7 @@ import { displayCards } from "./cards"
 
 interface Props {
     community: Card[];
-    hand: Card[]
+    player: Card[]
 }
 
 export default class Table extends React.Component<Props, null> {
@@ -14,7 +14,7 @@ export default class Table extends React.Component<Props, null> {
     render() {
         return (<div>
             Community: {displayCards(this.props.community)}
-            Your cards: {displayCards(this.props.hand)}
+            Your cards: {displayCards(this.props.player)}
         </div>)
     }
 }
