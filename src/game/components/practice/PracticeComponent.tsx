@@ -1,12 +1,13 @@
 import * as React from 'react';
 import * as R from 'ramda';
 import { GameTurn, Cards } from '../../../poker/types';
-// import OutsComponent from './OutsComponent';
+import OutsComponent from './OutsComponent';
 import HandReadingComponent from './HandReadingComponent';
 import Table from '../../../poker/Table';
+import { dealCards } from '../../../poker/dealer';
 
 interface Props {
-    dealer: (gt: GameTurn) => Cards;
+    game: string
 }
 
 interface State {
@@ -20,23 +21,30 @@ export default class PracticeComponent extends React.Component<Props, State> {
         super(props);
         this.state = {
             gameTurn: GameTurn.FLOP,
-            cards: this.props.dealer(GameTurn.FLOP)
+            cards: dealCards(GameTurn.FLOP)
         };
     }
 
     next() {
         this.setState((prev) =>
-            R.merge(prev, {cards: this.props.dealer(prev.gameTurn)})
+            R.merge(prev, {cards: dealCards(prev.gameTurn)})
         );
+    }
+
+    renderGame(game: string) {
+        switch (game) {
+            case 'hands': return (<HandReadingComponent cards={this.state.cards} next={() => this.next()} />);
+            case 'outs': return (<OutsComponent cards={this.state.cards} next={() => this.next()} />);
+            default: return 'Unknown game.'
+        }
     }
 
     render() {
         return (
             <div>
                 <Table community={this.state.cards.community} player={this.state.cards.player} />
-                {/*<OutsComponent cards={this.state.cards} next={() => this.next()} />*/}
-                <HandReadingComponent cards={this.state.cards} next={() => this.next()} />
-            </div>
+                {this.renderGame(this.props.game)}
+                </div>
         );
     }
 }
