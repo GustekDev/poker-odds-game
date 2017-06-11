@@ -7,22 +7,7 @@ export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[])
     let allCards = community.concat(hand)
     let handRank = evaluate(allCards)
     if (handRank.handRank == HandRank.PAIR) {
-        if (isPocketPair(hand)) {
-            let isOut = (card: Card) => card.rank == hand[0].rank
-            return R.filter(isOut, remainingCards)
-        }
-        if (noPair(community)) {
-            var outs = [];
-            for (let card of remainingCards) {
-                let newCommunity = R.append(card, community)
-                let rank = evaluate(newCommunity.concat(hand))
-                if ((rank.handRank == HandRank.TWO_PAIRS && noPair(newCommunity))
-                 || rank.handRank == HandRank.THREEE_OF_KIND) {
-                    outs.push(card)
-                }
-            }
-            return outs;
-        }
+        return getMatchingCards(hand, remainingCards)
     }
     if (handRank.handRank < HandRank.STRAIGHT) {
         let straightOuts = checkForStraights(community, hand, remainingCards)
@@ -39,9 +24,20 @@ export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[])
     return outs;
 }
 
-const noPair = (cards: Card[]): boolean => {
-    return R.uniq(cards.map((c) => c.rank)).length == cards.length;
+const getMatchingCards = (hand: Card[], remainingCards: Card[]): Card[] => {
+    let outs = [];
+    let handRanks = hand.map((c) => c.rank)
+    for (let card of remainingCards) {
+        if (R.contains(card.rank, handRanks)) {
+            outs.push(card)
+        }
+    }
+    return outs;
 }
+
+// const noPair = (cards: Card[]): boolean => {
+//     return R.uniq(cards.map((c) => c.rank)).length == cards.length;
+// }
 
 const checkForStraights = (community: Card[], hand: Card[], remainingCards: Card[]): Card[] => {
     let allCards = community.concat(hand)
@@ -55,6 +51,6 @@ const checkForStraights = (community: Card[], hand: Card[], remainingCards: Card
     return outs;
 }
 
-const isPocketPair = (hand: Card[]): boolean => {
-    return hand[0].rank == hand[1].rank
-}
+// const isPocketPair = (hand: Card[]): boolean => {
+//     return hand[0].rank == hand[1].rank
+// }
