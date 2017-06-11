@@ -8,7 +8,11 @@ export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[])
     let handRank = evaluate(allCards)
     var outs: Card[] = [];
     if (handRank.handRank > HandRank.HIGH_CARD) {
-        outs = getMatchingCards(hand, remainingCards);
+        if (handRank.handRank == HandRank.THREEE_OF_KIND) {
+            outs = getMatchingCards(allCards, remainingCards);
+        } else {
+            outs = getMatchingCards(hand, remainingCards);
+        }
     }
     if (handRank.handRank < HandRank.STRAIGHT) {
         outs = outs.concat(checkForStraights(community, hand, remainingCards))
