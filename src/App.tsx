@@ -1,7 +1,8 @@
 import * as React from 'react';
 import './App.css';
 import './poker/cards.css';
-import GameComponenet from './game/components/GameComponent';
+import PracticeComponenet from './game/components/practice/PracticeComponent';
+import { dealCards } from './poker/dealer';
 
 const logo = require('./logo.svg');
 
@@ -14,7 +15,7 @@ class App extends React.Component<{}, null> {
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
-          <GameComponenet />
+          <PracticeComponenet dealer={dealCards} />
         </p>
       </div>
     );

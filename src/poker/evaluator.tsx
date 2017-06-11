@@ -25,3 +25,17 @@ const getHandRank = (name: String): HandRank => {
         default: return HandRank.HIGH_CARD;
     }
 };
+
+export const displayHandRank = (rank: HandRank): string => {
+    switch (rank) {
+        case HandRank.STRAIGHT_FLUSH: return 'Straight Flush';
+        case HandRank.FOUR_OF_KIND: return 'Four of a Kind';
+        case HandRank.FULL_HOUSE: return 'Full House';
+        case HandRank.FLUSH: return 'Flush';
+        case HandRank.STRAIGHT: return 'Straight';
+        case HandRank.THREEE_OF_KIND: return 'Three of a Kind';
+        case HandRank.TWO_PAIRS: return 'Two Pair';
+        case HandRank.PAIR: return 'Pair';
+        default: return 'High card';
+    }
+};
