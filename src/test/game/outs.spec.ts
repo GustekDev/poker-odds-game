@@ -56,6 +56,16 @@ describe("Outs counter", () => {
         let expectedOuts = cardsFromShort(["Td", "2c", "2d", "2s", "4s", "4d", "4c"])
         runTest(community, player, expectedOuts)
     })
+
+    it("should return valid 15 cards for outside flush straight", () => {
+        let community = cardsFromShort(["4d", "7d", "As", "Jh"])
+        let player = cardsFromShort(["5d", "6d"])
+        let expectedOuts = cardsFromShort([
+            "3d", "3h", "3c", "3s", "8d", "8h", "8c", "8s", // straight
+            "2d", "9d", "Td", "Jd", "Qd", "Kd", "Ad" // flush
+            ])
+        runTest(community, player, expectedOuts)
+    })
 })
 
 
