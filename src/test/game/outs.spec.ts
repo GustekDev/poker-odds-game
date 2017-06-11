@@ -42,6 +42,13 @@ describe("Outs counter", () => {
         let expectedOuts = cardsFromShort(["3s", "5s", "6s", "7s", "8s", "9s", "Qs", "Ks", "As"])
         runTest(community, player, expectedOuts)
     })
+
+    it("should return 4 outs for two pairs drawin to full house", () => {
+        let community = cardsFromShort(["4h", "Tc", "2h", "3d"])
+        let player = cardsFromShort(["Ts", "2s"])
+        let expectedOuts = cardsFromShort(["Th", "Td", "2c", "2d"])
+        runTest(community, player, expectedOuts)
+    })
 })
 
 
