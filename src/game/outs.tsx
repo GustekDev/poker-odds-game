@@ -11,7 +11,8 @@ export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[])
         if (handRank.handRank == HandRank.THREEE_OF_KIND) {
             outs = getMatchingCards(allCards, remainingCards);
         } else {
-            outs = getMatchingCards(hand, remainingCards);
+            let maybeOuts = getMatchingCards(hand, remainingCards);
+            outs = onlyImprovingCards(allCards, maybeOuts)
         }
     }
     if (handRank.handRank < HandRank.STRAIGHT) {
@@ -38,6 +39,13 @@ const getMatchingCards = (hand: Card[], remainingCards: Card[]): Card[] => {
 // const noPair = (cards: Card[]): boolean => {
 //     return R.uniq(cards.map((c) => c.rank)).length == cards.length;
 // }
+
+const onlyImprovingCards = (currentCards: Card[], potentialOuts: Card[]): Card[] => {
+    let currentRank = evaluate(currentCards)
+    return R.filter((c: Card) => {
+        return evaluate(R.append(c, currentCards)).rank > currentRank.rank
+    })(potentialOuts)
+}
 
 const isFlushDraw = (community: Card[], hand: Card[]): Suit | undefined => {
     let suitsCount: {[suit: string]: number} = R.countBy((c: Card) => shortSuit(c.suit), community.concat(hand))
