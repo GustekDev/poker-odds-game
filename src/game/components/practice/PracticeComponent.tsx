@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as R from 'ramda';
 import { GameTurn, Cards } from '../../../poker/types';
-import OutsComponent from './OutsComponent';
+// import OutsComponent from './OutsComponent';
+import HandReadingComponent from './HandReadingComponent';
 import Table from '../../../poker/Table';
 
 interface Props {
@@ -33,7 +34,8 @@ export default class PracticeComponent extends React.Component<Props, State> {
         return (
             <div>
                 <Table community={this.state.cards.community} player={this.state.cards.player} />
-                <OutsComponent cards={this.state.cards} next={() => this.next()} />
+                {/*<OutsComponent cards={this.state.cards} next={() => this.next()} />*/}
+                <HandReadingComponent cards={this.state.cards} next={() => this.next()} />
             </div>
         );
     }
