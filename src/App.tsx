@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './App.css';
-import "./poker/cards.css"
-import GameComponenet from "./game/components/GameComponent"
+import './poker/cards.css';
+import GameComponenet from './game/components/GameComponent';
 
 const logo = require('./logo.svg');
 
