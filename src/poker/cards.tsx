@@ -36,7 +36,7 @@ const displaySuit = (s: Suit) => {
     throw new RangeError("Invalid suit: " + s)
 }
 
-const shortSuit = (s: Suit) => {
+export const shortSuit = (s: Suit) => {
     switch (s) {
         case Suit.HEARTHS: return "h"
         case Suit.DIAMONDS: return "d"

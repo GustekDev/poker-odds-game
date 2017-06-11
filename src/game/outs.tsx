@@ -1,7 +1,7 @@
 import * as R from "ramda"
 import { evaluate } from "../poker/evaluator"
-import { Card, HandRank } from "../poker/types"
-// import { shortCard } from "../poker/cards"
+import { Card, HandRank, Suit } from "../poker/types"
+import { shortSuit } from "../poker/cards"
 
 export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[]): Card[] => {
     let allCards = community.concat(hand)
@@ -14,6 +14,10 @@ export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[])
         if (straightOuts.length > 0) {
             return straightOuts
         }
+    }
+    let flushDrawSuit = isFlushDraw(community, hand)
+    if (flushDrawSuit) {
+        return R.filter((c: Card) => c.suit == flushDrawSuit, remainingCards)
     }
     var outs = [];
     for (let card of remainingCards) {
@@ -38,6 +42,13 @@ const getMatchingCards = (hand: Card[], remainingCards: Card[]): Card[] => {
 // const noPair = (cards: Card[]): boolean => {
 //     return R.uniq(cards.map((c) => c.rank)).length == cards.length;
 // }
+
+const isFlushDraw = (community: Card[], hand: Card[]): Suit | undefined => {
+    let suitsCount: {[suit: string]: number} = R.countBy((c: Card) => shortSuit(c.suit), community.concat(hand))
+    return R.find((c: Card) => {
+        return R.prop(shortSuit(c.suit), suitsCount) == 4
+    })(hand).suit
+}
 
 const checkForStraights = (community: Card[], hand: Card[], remainingCards: Card[]): Card[] => {
     let allCards = community.concat(hand)
