@@ -105,7 +105,7 @@ describe("Outs counter", () => {
 
 
 const runTest = (community: Card[], player: Card[], expectedOuts: Card[]) => {
-    let remainingCards = R.difference(getNewDeck(), community.concat(player))
-    let outs = getOuts(community, player, remainingCards)
+    let remaining = R.difference(getNewDeck(), community.concat(player))
+    let outs = getOuts({community, player, remaining})
     expect(outs).to.have.deep.members(expectedOuts)
 }

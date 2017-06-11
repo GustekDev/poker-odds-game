@@ -1,26 +1,26 @@
 import * as R from "ramda"
 import { evaluate } from "../poker/evaluator"
-import { Card, HandRank, Suit } from "../poker/types"
+import { Card, Cards, HandRank, Suit } from "../poker/types"
 import { shortSuit } from "../poker/cards"
 
-export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[]): Card[] => {
-    let allCards = community.concat(hand)
+export const getOuts = (cards: Cards): Card[] => {
+    let allCards = cards.community.concat(cards.player)
     let handRank = evaluate(allCards)
     var outs: Card[] = [];
     if (handRank.handRank > HandRank.HIGH_CARD) {
         if (handRank.handRank == HandRank.THREEE_OF_KIND) {
-            outs = getMatchingCards(allCards, remainingCards);
+            outs = getMatchingCards(allCards, cards.remaining);
         } else {
-            let maybeOuts = getMatchingCards(hand, remainingCards);
+            let maybeOuts = getMatchingCards(cards.player, cards.remaining);
             outs = onlyImprovingCards(allCards, maybeOuts)
         }
     }
     if (handRank.handRank < HandRank.STRAIGHT) {
-        outs = outs.concat(checkForStraights(community, hand, remainingCards))
+        outs = outs.concat(checkForStraights(cards))
     }
-    let flushDrawSuit = isFlushDraw(community, hand)
+    let flushDrawSuit = isFlushDraw(cards.community, cards.player)
     if (flushDrawSuit) {
-        outs = outs.concat(R.filter((c: Card) => c.suit == flushDrawSuit, remainingCards))
+        outs = outs.concat(R.filter((c: Card) => c.suit == flushDrawSuit, cards.remaining))
     }
     return outs;
 }
@@ -35,10 +35,6 @@ const getMatchingCards = (hand: Card[], remainingCards: Card[]): Card[] => {
     }
     return outs;
 }
-
-// const noPair = (cards: Card[]): boolean => {
-//     return R.uniq(cards.map((c) => c.rank)).length == cards.length;
-// }
 
 const onlyImprovingCards = (currentCards: Card[], potentialOuts: Card[]): Card[] => {
     let currentRank = evaluate(currentCards)
@@ -55,10 +51,10 @@ const isFlushDraw = (community: Card[], hand: Card[]): Suit | undefined => {
     return drawingSuitCard ? drawingSuitCard.suit : undefined
 }
 
-const checkForStraights = (community: Card[], hand: Card[], remainingCards: Card[]): Card[] => {
-    let allCards = community.concat(hand)
+const checkForStraights = (cards: Cards): Card[] => {
+    let allCards = cards.community.concat(cards.player)
     var outs = [];
-    for (let card of remainingCards) {
+    for (let card of cards.remaining) {
         let rank = evaluate(R.append(card, allCards))
         if (rank.handRank == HandRank.STRAIGHT) {
             outs.push(card)
@@ -66,7 +62,3 @@ const checkForStraights = (community: Card[], hand: Card[], remainingCards: Card
     }
     return outs;
 }
-
-// const isPocketPair = (hand: Card[]): boolean => {
-//     return hand[0].rank == hand[1].rank
-// }
