@@ -4,6 +4,9 @@ import { GameTurn, Cards, PokerHand } from "../../poker/types"
 import { dealCards } from "../../poker/dealer"
 import Table from "../../poker/Table"
 
+import OutsPracticeComponent from "./OutsPracticeComponent"
+import { getOuts } from "../outs"
+
 interface Props {
 
 }
@@ -60,6 +63,7 @@ export default class GameComponent extends React.Component<Props, State> {
             </div>
             <button onClick={() => this.dealNewCards()}>Deal</button>
             <Table community={this.state.cards.community} player={this.state.cards.player} />
+            <OutsPracticeComponent cards={this.state.cards} outs={getOuts(this.state.cards)} />
         </div>)
     }
 }
