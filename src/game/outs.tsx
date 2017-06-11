@@ -6,24 +6,16 @@ import { shortSuit } from "../poker/cards"
 export const getOuts = (community: Card[], hand: Card[], remainingCards: Card[]): Card[] => {
     let allCards = community.concat(hand)
     let handRank = evaluate(allCards)
-    if (handRank.handRank == HandRank.PAIR) {
-        return getMatchingCards(hand, remainingCards)
+    var outs: Card[] = [];
+    if (handRank.handRank > HandRank.HIGH_CARD) {
+        outs = getMatchingCards(hand, remainingCards);
     }
     if (handRank.handRank < HandRank.STRAIGHT) {
-        let straightOuts = checkForStraights(community, hand, remainingCards)
-        if (straightOuts.length > 0) {
-            return straightOuts
-        }
+        outs = outs.concat(checkForStraights(community, hand, remainingCards))
     }
     let flushDrawSuit = isFlushDraw(community, hand)
     if (flushDrawSuit) {
-        return R.filter((c: Card) => c.suit == flushDrawSuit, remainingCards)
-    }
-    var outs = [];
-    for (let card of remainingCards) {
-        if (evaluate(R.append(card, allCards)).rank > handRank.rank) {
-            outs.push(card)
-        }
+        outs = outs.concat(R.filter((c: Card) => c.suit == flushDrawSuit, remainingCards))
     }
     return outs;
 }
@@ -45,9 +37,10 @@ const getMatchingCards = (hand: Card[], remainingCards: Card[]): Card[] => {
 
 const isFlushDraw = (community: Card[], hand: Card[]): Suit | undefined => {
     let suitsCount: {[suit: string]: number} = R.countBy((c: Card) => shortSuit(c.suit), community.concat(hand))
-    return R.find((c: Card) => {
+    let drawingSuitCard = R.find((c: Card) => {
         return R.prop(shortSuit(c.suit), suitsCount) == 4
-    })(hand).suit
+    })(hand)
+    return drawingSuitCard ? drawingSuitCard.suit : undefined
 }
 
 const checkForStraights = (community: Card[], hand: Card[], remainingCards: Card[]): Card[] => {
