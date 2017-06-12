@@ -2,10 +2,9 @@ import * as React from 'react';
 import {
   Route, NavLink as Link
 } from 'react-router-dom'
-import './App.css';
 import './poker/cards.css';
 import PracticeComponenet from './game/components/practice/PracticeComponent';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, Row, Col, Grid } from 'react-bootstrap';
 
 const practice = (match: any) => {
   return (<PracticeComponenet game={match.params.game} />);
@@ -15,7 +14,7 @@ const navbarInstance = (
   <Navbar inverse collapseOnSelect>
     <Navbar.Header>
       <Navbar.Brand>
-          <Link to="/">Poker Odds Game</Link>
+        <Link to="/">Poker Odds Game</Link>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
@@ -35,15 +34,17 @@ const navbarInstance = (
 class App extends React.Component<{}, null> {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          {navbarInstance}
-        </div>
-        <p className="App-intro">
-          <Route exact path="/" render={() => (<div>Hello</div>)} />
-          <Route path="/practice/:game" render={({ match }) => practice(match)} />
-        </p>
-      </div>
+      <Grid>
+        <Row>
+          <Col>{navbarInstance}</Col>
+        </Row>
+        <Row>
+          <Col className="center-block text-center">
+            <Route exact path="/" render={() => (<div>Hello</div>)} />
+            <Route path="/practice/:game" render={({ match }) => practice(match)} />
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }

@@ -7,6 +7,6 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 ReactDOM.render(
   (<Router><App /></Router>),
-  document.getElementById('root') as HTMLElement
+  document.getElementById('content') as HTMLElement
 );
 registerServiceWorker();
