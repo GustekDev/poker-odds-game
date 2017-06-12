@@ -2,6 +2,7 @@ import * as React from "react";
 import * as R from "ramda";
 import { Cards, HandRank } from "../../../poker/types";
 import { displayHandRank, evaluate } from "../../../poker/evaluator";
+import { Button } from 'react-bootstrap';
 
 interface Props {
     cards: Cards;
@@ -58,9 +59,9 @@ export default class HandReadingComponent extends React.Component<Props, State> 
         return (
             <div>
                 {this.state.guess !== undefined
-                ? <button onClick={() => this.props.next()}>Next</button>
+                ? <Button onClick={() => this.props.next()}>Next</Button>
                 : allRanks.map((hr: HandRank) =>
-                    (<button onClick={() => this.check(hr)}>{displayHandRank(hr)}</button>)
+                    (<Button onClick={() => this.check(hr)}>{displayHandRank(hr)}</Button>)
                 )}
                 {this.renderAnswer(this.state)}
             </div>
