@@ -4,7 +4,7 @@ import { GameTurn, Cards } from '../../../poker/types';
 import OutsComponent from './OutsComponent';
 import HandReadingComponent from './HandReadingComponent';
 import Table from '../../../poker/Table';
-import { dealCards } from '../../../poker/dealer';
+import { dealUnfairCards } from '../../../poker/dealer';
 
 interface Props {
     game: string
@@ -21,13 +21,13 @@ export default class PracticeComponent extends React.Component<Props, State> {
         super(props);
         this.state = {
             gameTurn: GameTurn.FLOP,
-            cards: dealCards(GameTurn.FLOP)
+            cards: dealUnfairCards(GameTurn.FLOP)
         };
     }
 
     next() {
         this.setState((prev) =>
-            R.merge(prev, {cards: dealCards(prev.gameTurn)})
+            R.merge(prev, {cards: dealUnfairCards(prev.gameTurn)})
         );
     }
 

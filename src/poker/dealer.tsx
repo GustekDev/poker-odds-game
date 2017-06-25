@@ -1,4 +1,5 @@
-import { Card, Cards, Rank, Suit, GameTurn } from './types';
+import { Card, Cards, Rank, Suit, GameTurn, HandRank } from './types';
+import { evaluate } from "./evaluator"
 
 const suits = [Suit.HEARTHS, Suit.DIAMONDS, Suit.CLUBS, Suit.SPADES];
 const ranks = [
@@ -15,6 +16,16 @@ export const dealCards = (turn: GameTurn): Cards => {
         remaining: cards.slice(2 + communityCount)
     };
 };
+
+export const dealUnfairCards = (turn: GameTurn): Cards => {
+    var cards = dealCards(turn);
+    var attempt = 0;
+    while(evaluate(cards.community.concat(cards.player)).handRank == HandRank.HIGH_CARD && attempt < 10)  {
+        var cards = dealCards(turn);
+        attempt++;
+    }
+    return cards;
+}
 
 export const getNewDeck = (): Card[] => {
     let cards: Card[] = [];
