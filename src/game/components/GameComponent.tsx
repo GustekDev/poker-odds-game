@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as R from 'ramda';
-import { GameTurn, Cards, PokerHand } from '../../poker/types';
+import { GameTurn, Cards, PokerHand } from '../../lib/poker/index';
 import { dealCards } from '../../poker/dealer';
 import Table from '../../poker/Table';
 
