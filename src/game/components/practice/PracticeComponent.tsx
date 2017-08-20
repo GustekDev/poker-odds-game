@@ -1,13 +1,12 @@
 import * as React from 'react';
 import * as R from 'ramda';
-import { GameTurn, Cards } from '../../../poker/types';
 import OutsComponent from './OutsComponent';
 import HandReadingComponent from './HandReadingComponent';
-import Table from '../../../poker/Table';
-import { dealUnfairCards } from '../../../poker/dealer';
+import Table from '../../../lib/poker/Table';
+import { dealUnfairCards } from '../../../lib/poker/dealer';
 
 interface Props {
-    game: string
+    game: GameName;
 }
 
 interface State {
@@ -20,8 +19,8 @@ export default class PracticeComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            gameTurn: GameTurn.FLOP,
-            cards: dealUnfairCards(GameTurn.FLOP)
+            gameTurn: 'Flop',
+            cards: dealUnfairCards('Flop')
         };
     }
 
@@ -31,11 +30,11 @@ export default class PracticeComponent extends React.Component<Props, State> {
         );
     }
 
-    renderGame(game: string) {
+    renderGame(game: GameName) {
         switch (game) {
-            case 'hands': return (<HandReadingComponent cards={this.state.cards} next={() => this.next()} />);
-            case 'outs': return (<OutsComponent cards={this.state.cards} next={() => this.next()} />);
-            default: return 'Unknown game.'
+            case 'hand-reading': return (<HandReadingComponent cards={this.state.cards} next={() => this.next()} />);
+            case 'outs-counting': return (<OutsComponent cards={this.state.cards} next={() => this.next()} />);
+            default: return 'Unknown game.';
         }
     }
 

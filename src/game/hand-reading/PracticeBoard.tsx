@@ -1,9 +1,8 @@
 import * as React from "react";
 import * as R from "ramda";
-import { Cards, HandRank } from "../../../poker/types";
-import { evaluate } from "../../../poker/evaluator";
+import { evaluate } from "../../lib/poker/evaluator";
 import { Button } from 'react-bootstrap';
-import HandsForm from '../HandsForm';
+import HandsForm from '../components/HandsForm';
 
 interface Props {
     cards: Cards;
@@ -42,7 +41,7 @@ export default class PracticeBoard extends React.Component<Props, State> {
         let answer = evaluate(this.props.cards.community.concat(this.props.cards.player));
             return (
                 <div>
-                    <span>{state.guess === answer.handRank ? 'Correct' : 'Wrong'}</span>
+                    <span>{state.guess === answer.name ? 'Correct' : 'Wrong'}</span>
                     <br /><span>{answer.description}</span>
                 </div>
             );

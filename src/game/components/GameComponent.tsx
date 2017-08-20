@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as R from 'ramda';
-import { GameTurn, Cards, PokerHand } from '../../lib/poker/index';
-import { dealCards } from '../../poker/dealer';
-import Table from '../../poker/Table';
+import { dealCards } from '../../lib/poker/dealer';
+import Table from '../../lib/poker/Table';
 
 interface Props {
 
@@ -19,8 +18,8 @@ export default class GameComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            gameTurn: GameTurn.FLOP,
-            cards: dealCards(GameTurn.FLOP)
+            gameTurn: "Flop",
+            cards: dealCards("Flop")
         };
         this.dealNewCards();
     }
@@ -38,21 +37,17 @@ export default class GameComponent extends React.Component<Props, State> {
     }
 
     renderTurnRadios(curr: GameTurn): JSX.Element[] {
-        let turns = [
-            { turn: GameTurn.FLOP, label: 'Flop', checked: curr === GameTurn.FLOP },
-            { turn: GameTurn.TURN, label: 'Turn', checked: curr === GameTurn.TURN },
-            { turn: GameTurn.RIVER, label: 'River', checked: curr === GameTurn.RIVER },
-        ];
+        let turns: GameTurn[] = [ "Flop", "Turn", "River"];
         return turns.map((turn) => {
             return (
                 <label>
                     <input
                         type="radio"
                         name="turn"
-                        checked={turn.checked}
-                        value={turn.turn}
-                        onClick={() => this.setTurn(turn.turn)}
-                    />{turn.label}
+                        checked={this.state.gameTurn == turn}
+                        value={turn}
+                        onClick={() => this.setTurn(turn)}
+                    />{turn}
                 </label>
             );
         });

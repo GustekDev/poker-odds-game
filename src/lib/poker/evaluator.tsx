@@ -1,41 +1,27 @@
 import { Hand } from 'pokersolver';
-import { Card, PokerHand, HandRank } from './types';
 import { shortCard } from './cards';
 
 export const evaluate = (cards: Card[]): PokerHand => {
     let hand: SolverHand = Hand.solve(cards.map(shortCard));
     return {
-        name: hand.name,
+        name: hand.name as HandRank,
         description: hand.descr,
         rank: hand.rank,
-        handRank: getHandRank(hand.name)
+        handRank: getHandRank(hand.name as HandRank)
     };
 };
 
-const getHandRank = (name: String): HandRank => {
+export const getHandRank = (name: HandRank): number => {
     switch (name) {
-        case 'Straight Flush': return HandRank.STRAIGHT_FLUSH;
-        case 'Four of a Kind': return HandRank.FOUR_OF_KIND;
-        case 'Full House': return HandRank.FULL_HOUSE;
-        case 'Flush': return HandRank.FLUSH;
-        case 'Straight': return HandRank.STRAIGHT;
-        case 'Three of a Kind': return HandRank.THREEE_OF_KIND;
-        case 'Two Pair': return HandRank.TWO_PAIRS;
-        case 'Pair': return HandRank.PAIR;
-        default: return HandRank.HIGH_CARD;
-    }
-};
-
-export const displayHandRank = (rank: HandRank): string => {
-    switch (rank) {
-        case HandRank.STRAIGHT_FLUSH: return 'Straight Flush';
-        case HandRank.FOUR_OF_KIND: return 'Four of a Kind';
-        case HandRank.FULL_HOUSE: return 'Full House';
-        case HandRank.FLUSH: return 'Flush';
-        case HandRank.STRAIGHT: return 'Straight';
-        case HandRank.THREEE_OF_KIND: return 'Three of a Kind';
-        case HandRank.TWO_PAIRS: return 'Two Pair';
-        case HandRank.PAIR: return 'Pair';
-        default: return 'High card';
+        case 'Straight Flush': return 8;
+        case 'Four of a Kind': return 7;
+        case 'Full House': return 6;
+        case 'Flush': return 5;
+        case 'Straight': return 4;
+        case 'Three of a Kind': return 3;
+        case 'Two Pair': return 2;
+        case 'Pair': return 1;
+        case 'High Card': return 0;
+        default: return 0;
     }
 };

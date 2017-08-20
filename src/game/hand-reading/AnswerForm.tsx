@@ -1,15 +1,11 @@
 import * as React from "react";
-import { HandRank } from "../../poker/types";
-import { displayHandRank } from "../../poker/evaluator";
-import { Button } from 'react-bootstrap';
 
 interface Props {
     answer: Function;
 }
 
 const allRanks = [
-    HandRank.HIGH_CARD, HandRank.PAIR, HandRank.TWO_PAIRS, HandRank.THREEE_OF_KIND, HandRank.STRAIGHT,
-    HandRank.FLUSH, HandRank.FULL_HOUSE, HandRank.FOUR_OF_KIND, HandRank.STRAIGHT_FLUSH
+    'Straight Flush' ,'Four of a Kind' ,'Full House' ,'Flush' ,'Straight' ,'Three of a Kind' ,'Two Pair' ,'Pair' ,'High card'
 ];
 
 export default class AnswerForm extends React.Component<Props, null> {
@@ -18,7 +14,7 @@ export default class AnswerForm extends React.Component<Props, null> {
         return (
             <div>
                 {allRanks.map((hr: HandRank) =>
-                    (<Button onClick={() => this.props.answer(hr)}>{displayHandRank(hr)}</Button>))
+                    (<button onClick={() => this.props.answer(hr)}>{hr}</button>))
                 }
             </div>
         )

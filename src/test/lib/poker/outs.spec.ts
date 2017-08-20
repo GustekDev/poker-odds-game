@@ -1,8 +1,7 @@
 import * as R from "ramda"
-import { getOuts } from "../../game/outs"
-import { getNewDeck } from "../../poker/dealer"
-import { cardsFromShort } from "../../poker/cards"
-import { Card } from "../../poker/types"
+import { getOuts } from "../../../lib/poker/outs"
+import { getNewDeck } from "../../../lib/poker/dealer"
+import { cardsFromShort } from "../../../lib/poker/cards"
 import { expect } from "chai"
 
 

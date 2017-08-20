@@ -1,21 +1,20 @@
 import * as R from 'ramda';
-import { evaluate } from '../poker/evaluator';
-import { Card, Cards, HandRank, Suit } from '../poker/types';
+import { evaluate, getHandRank } from '../poker/evaluator';
 import { shortSuit } from '../poker/cards';
 
 export const getOuts = (cards: Cards): Card[] => {
     let allCards = cards.community.concat(cards.player);
     let handRank = evaluate(allCards);
     var outs: Card[] = [];
-    if (handRank.handRank > HandRank.HIGH_CARD) {
-        if (handRank.handRank === HandRank.THREEE_OF_KIND) {
+    if (handRank.handRank > getHandRank('High Card')) {
+        if (handRank.handRank === getHandRank('Three of a Kind')) {
             outs = getMatchingCards(allCards, cards.remaining);
         } else {
             let maybeOuts = getMatchingCards(cards.player, cards.remaining);
             outs = onlyImprovingCards(allCards, maybeOuts);
         }
     }
-    if (handRank.handRank < HandRank.STRAIGHT) {
+    if (handRank.handRank < getHandRank('Straight')) {
         outs = outs.concat(checkForStraights(cards));
     }
     let flushDrawSuit = isFlushDraw(cards.community, cards.player);
@@ -43,7 +42,7 @@ const onlyImprovingCards = (currentCards: Card[], potentialOuts: Card[]): Card[]
     })(potentialOuts);
 };
 
-const isFlushDraw = (community: Card[], hand: Card[]): Suit | undefined => {
+const isFlushDraw = (community: Card[], hand: Card[]): CardSuit | undefined => {
     let suitsCount: {[suit: string]: number} = R.countBy((c: Card) => shortSuit(c.suit), community.concat(hand));
     let drawingSuitCard = R.find((c: Card) => {
         return R.prop(shortSuit(c.suit), suitsCount) === 4;
@@ -56,7 +55,7 @@ const checkForStraights = (cards: Cards): Card[] => {
     var outs = [];
     for (let card of cards.remaining) {
         let rank = evaluate(R.append(card, allCards));
-        if (rank.handRank === HandRank.STRAIGHT) {
+        if (rank.handRank === getHandRank('Straight')) {
             outs.push(card);
         }
     }

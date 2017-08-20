@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { Card } from './types';
 import { displayCards, displayCommnityCards } from './cards';
 
 interface Props {
@@ -9,8 +8,6 @@ interface Props {
 }
 
 export default class Table extends React.Component<Props, null> {
-
-
 
     render() {
         return (

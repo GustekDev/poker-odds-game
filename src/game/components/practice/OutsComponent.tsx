@@ -1,8 +1,6 @@
 import * as React from 'react';
 import * as R from 'ramda';
-import { getOuts } from '../../outs';
-
-import { Cards } from '../../../poker/types';
+import { getOuts } from '../../../lib/poker/outs';
 
 interface Props {
     cards: Cards;

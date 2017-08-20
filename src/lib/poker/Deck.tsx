@@ -1,13 +1,8 @@
-import { Card, Suit, Rank } from "./types"
 
 export default class Deck {
 
-
-    private suits = [Suit.HEARTHS, Suit.DIAMONDS, Suit.CLUBS, Suit.SPADES]
-    private ranks = [
-        Rank.RANK_2, Rank.RANK_3, Rank.RANK_4, Rank.RANK_5, Rank.RANK_6, Rank.RANK_7, Rank.RANK_8, Rank.RANK_9,
-        Rank.RANK_10, Rank.RANK_JACK, Rank.RANK_QUEEN, Rank.RANK_KING, Rank.RANK_ACE
-    ]
+    private suits: CardSuit[] = ["H", "D", "C", "S"];
+    private ranks: CardRank[] = ["2" ,"3" ,"4" ,"5" ,"5" ,"6" ,"7" ,"8" ,"9" ,"T" ,"J" ,"Q" ,"K" ,"A"];
 
     private cards: Card[] = [];
 
