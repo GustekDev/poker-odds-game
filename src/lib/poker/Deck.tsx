@@ -1,19 +1,20 @@
 
 export default class Deck {
 
-    private suits: CardSuit[] = ["H", "D", "C", "S"];
-    private ranks: CardRank[] = ["2" ,"3" ,"4" ,"5" ,"5" ,"6" ,"7" ,"8" ,"9" ,"T" ,"J" ,"Q" ,"K" ,"A"];
+    private suits: CardSuit[] = ['H', 'D', 'C', 'S'];
+    private ranks: CardRank[] = ['2', '3', '4', '5', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
 
     private cards: Card[] = [];
 
     constructor() {
-        this.reset()
+        this.reset();
     }
 
     reset() {
         for (let suit of this.suits) {
-            for (let rank of this.ranks)
-                this.cards.push({ suit, rank })
+            for (let rank of this.ranks) {
+                this.cards.push({ suit, rank });
+            }
         }
     }
 
@@ -39,7 +40,7 @@ export default class Deck {
 
     deal(n: number): Card[] {
         let deal = this.cards.slice(0, n);
-        this.cards = this.cards.slice(n)
+        this.cards = this.cards.slice(n);
         return deal;
     }
 

@@ -1,6 +1,6 @@
-import * as React from "react";
-import * as R from "ramda";
-import { evaluate } from "../../lib/poker/evaluator";
+import * as React from 'react';
+import * as R from 'ramda';
+import { evaluate } from '../../lib/poker/evaluator';
 import { Button } from 'react-bootstrap';
 import HandsForm from '../components/HandsForm';
 
@@ -39,7 +39,7 @@ export default class PracticeBoard extends React.Component<Props, State> {
     renderAnswer = (state: State) => {
         if (state.showAnswer) {
         let answer = evaluate(this.props.cards.community.concat(this.props.cards.player));
-            return (
+        return (
                 <div>
                     <span>{state.guess === answer.name ? 'Correct' : 'Wrong'}</span>
                     <br /><span>{answer.description}</span>
@@ -58,6 +58,6 @@ export default class PracticeBoard extends React.Component<Props, State> {
                 : <HandsForm answer={this.check} />}
                 {this.renderAnswer(this.state)}
             </div>
-        )
+        );
     }
 }

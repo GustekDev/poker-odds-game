@@ -18,8 +18,8 @@ export default class GameComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            gameTurn: "Flop",
-            cards: dealCards("Flop")
+            gameTurn: 'Flop',
+            cards: dealCards('Flop')
         };
         this.dealNewCards();
     }
@@ -37,14 +37,14 @@ export default class GameComponent extends React.Component<Props, State> {
     }
 
     renderTurnRadios(curr: GameTurn): JSX.Element[] {
-        let turns: GameTurn[] = [ "Flop", "Turn", "River"];
+        let turns: GameTurn[] = [ 'Flop', 'Turn', 'River'];
         return turns.map((turn) => {
             return (
                 <label>
                     <input
                         type="radio"
                         name="turn"
-                        checked={this.state.gameTurn == turn}
+                        checked={this.state.gameTurn === turn}
                         value={turn}
                         onClick={() => this.setTurn(turn)}
                     />{turn}

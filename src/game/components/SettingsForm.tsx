@@ -1,14 +1,14 @@
-import * as React from "react"
+import * as React from 'react';
 
 export default class SettingsForm extends React.Component<any, GameSettings> {
 
     constructor(props: any) {
         super(props);
         this.state = {
-            turn: "Flop",
+            turn: 'Flop',
             rounds: 10,
-            game: "hand-reading"
-        }
+            game: 'hand-reading'
+        };
     }
 
     render() {
@@ -16,15 +16,15 @@ export default class SettingsForm extends React.Component<any, GameSettings> {
             <form>
                 <div>
                 <label>
-                    <input type="radio" name="turn" value="Flop" checked={this.state.turn == "Flop"} />
+                    <input type="radio" name="turn" value="Flop" checked={this.state.turn === 'Flop'} />
                     Flop
                 </label>
                 <label>
-                    <input type="radio" name="turn" value="Turn" checked={this.state.turn == "Turn"} />
+                    <input type="radio" name="turn" value="Turn" checked={this.state.turn === 'Turn'} />
                     Turn
                 </label>
                 <label>
-                    <input type="radio" name="turn" value="River" checked={this.state.turn == "River"} />
+                    <input type="radio" name="turn" value="River" checked={this.state.turn === 'River'} />
                     River
                 </label>
                 </div>
@@ -35,7 +35,7 @@ export default class SettingsForm extends React.Component<any, GameSettings> {
                     </label>
                 </div>
             </form>
-        )
+        );
     }
 
 }
