@@ -5,27 +5,33 @@ interface Props {
   answer: Function;
 }
 
-const allRanks: HandRank[] = [
-  'Straight Flush',
-  'Four of a Kind',
+const ranksRow1: HandRank[] = ['High Card', 'Pair', 'Two Pair'];
+
+const ranksRow2: HandRank[] = ['Three of a Kind', 'Flush', 'Straight'];
+
+const ranksRow3: HandRank[] = [
   'Full House',
-  'Flush',
-  'Straight',
-  'Three of a Kind',
-  'Two Pair',
-  'Pair',
-  'High Card'
+  'Four of a Kind',
+  'Straight Flush'
 ];
 
 export default class HandsForm extends React.Component<Props, null> {
+  renderRow(ranks: HandRank[]) {
+    return (
+      <div>
+        {ranks.map(hr => (
+          <Button onClick={() => this.props.answer(hr)}>{hr}</Button>
+        ))}
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
-        {allRanks.map(hr =>
-          <Button onClick={() => this.props.answer(hr)}>
-            {hr}
-          </Button>
-        )}
+        {this.renderRow(ranksRow3)}
+        {this.renderRow(ranksRow2)}
+        {this.renderRow(ranksRow1)}
       </div>
     );
   }

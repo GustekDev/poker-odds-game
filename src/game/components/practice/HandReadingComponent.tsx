@@ -60,7 +60,6 @@ export default class HandReadingComponent extends React.Component<
   }
 
   render() {
-    console.log(this.state.guess);
     return (
       <div>
         {this.state.guess !== undefined
