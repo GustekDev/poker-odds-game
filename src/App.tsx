@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { Route, Link, match } from 'react-router-dom';
+import { Route, NavLink, Link, match } from 'react-router-dom';
 import PracticeComponent from './game/components/practice/PracticeComponent';
 
 const navbarInstance = (
   <nav className="navbar navbar-expand-md navbar-dark bg-dark">
     <Link to="/">Poker Odds Game</Link>
     <ul className="navbar-nav">
-      <li className="nav-item"><Link className="nav-link" to="/practice/hand-reading">Practice hands</Link></li>
-      <li className="nav-item"><Link className="nav-link" to="/practice/outs-counting">Practice outs</Link></li>
+      <li className="nav-item"><NavLink className="nav-link" to="/practice/hand-reading">Practice hands</NavLink></li>
+      <li className="nav-item"><NavLink className="nav-link" to="/practice/outs-counting">Practice outs</NavLink></li>
     </ul>
   </nav>
 );
