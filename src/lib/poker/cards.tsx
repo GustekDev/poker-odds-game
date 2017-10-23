@@ -2,9 +2,9 @@ import * as React from 'react';
 
 export const displayCard = (card: Card) => {
     return (
-        <span>
-            <span className="rank">{card.rank}</span>
-            <span className="suit">{displaySuit(card.suit)}</span>
+        <span className={'playing-card align-middle text-center ' + suitClass(card.suit)}>
+            <span className="rank align-middle">{card.rank}</span>
+            <span className="suit align-middle">{displaySuit(card.suit)}</span>
         </span>
     );
 };
@@ -24,7 +24,7 @@ export const displayCommnityCards = (cards: Card[]) => {
 const renderUnknown = (dealtCount: number): JSX.Element[] => {
     var cards = [];
     for (let i = 0; i < 5 - dealtCount; i++) {
-        cards.push(<span>[]</span>);
+        cards.push(<span className="playing-card align-middle text-center playing-card-unknown">&nbsp;</span>);
     }
     return cards;
 };
@@ -40,6 +40,16 @@ const displaySuit = (s: CardSuit) => {
         case 'C': return '\u2663';
         case 'S': return '\u2660';
         default: return '?';
+    }
+};
+
+const suitClass = (s: CardSuit) => {
+    switch (s) {
+        case 'H': return 'hearths';
+        case 'D': return 'diamonds';
+        case 'C': return 'clubs';
+        case 'S': return 'spades';
+        default: return 'unknown';
     }
 };
 
