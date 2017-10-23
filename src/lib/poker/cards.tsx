@@ -18,13 +18,19 @@ export const displayCards = (cards: Card[]) => {
 };
 
 export const displayCommnityCards = (cards: Card[]) => {
-    return (<div className="playingCards simpleCards">{cards.map(displayCard)}{renderUnknown(cards.length)}</div>);
+    return (
+    <div className="playingCards simpleCards">
+        {cards.map(displayCard)}{renderUnknown(cards.length)}
+    </div>
+    );
 };
 
 const renderUnknown = (dealtCount: number): JSX.Element[] => {
     var cards = [];
     for (let i = 0; i < 5 - dealtCount; i++) {
-        cards.push(<span className="playing-card align-middle text-center playing-card-unknown">&nbsp;</span>);
+        cards.push(
+            <span className="playing-card align-middle text-center playing-card-unknown">&nbsp;</span>
+        );
     }
     return cards;
 };
