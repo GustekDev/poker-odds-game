@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as R from 'ramda';
 import { evaluate } from '../../lib/poker/evaluator';
-import { Button } from 'react-bootstrap';
 import HandsForm from '../components/HandsForm';
 
 interface Props {
@@ -54,7 +53,7 @@ export default class PracticeBoard extends React.Component<Props, State> {
         return (
             <div>
                 {this.state.guess !== undefined
-                ? <Button onClick={() => this.props.next()}>Next</Button>
+                ? <button onClick={() => this.props.next()}>Next</button>
                 : <HandsForm answer={this.check} />}
                 {this.renderAnswer(this.state)}
             </div>

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
 
 interface Props {
   answer: Function;
@@ -15,12 +14,12 @@ const ranksRow3: HandRank[] = [
   'Straight Flush'
 ];
 
-export default class HandsForm extends React.Component<Props, null> {
+export default class HandsForm extends React.Component<Props, any> {
   renderRow(ranks: HandRank[]) {
     return (
       <div>
         {ranks.map(hr => (
-          <Button onClick={() => this.props.answer(hr)}>{hr}</Button>
+          <button onClick={() => this.props.answer(hr)}>{hr}</button>
         ))}
       </div>
     );
