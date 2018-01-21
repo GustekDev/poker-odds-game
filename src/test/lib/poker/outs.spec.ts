@@ -3,7 +3,7 @@ import { getOuts } from "../../../lib/poker/outs"
 import { getNewDeck } from "../../../lib/poker/dealer"
 import { cardsFromShort } from "../../../lib/poker/cards"
 import { expect } from "chai"
-
+import * as Cards from '../../../lib/cards/cards';
 
 describe("Outs counter", () => {
 
@@ -12,7 +12,7 @@ describe("Outs counter", () => {
     it("should return no outs if we have 2 pairs in community cards an can't make it better", () => {
         let community = cardsFromShort([ "Th", "Tc", "Qd", "Qc" ])
         let player = cardsFromShort(["8c", "6h"])
-        let expectedOuts: Card[] = []
+        let expectedOuts: Cards.Card[] = []
         runTest(community, player, expectedOuts)
     })
 
@@ -103,7 +103,7 @@ describe("Outs counter", () => {
 })
 
 
-const runTest = (community: Card[], player: Card[], expectedOuts: Card[]) => {
+const runTest = (community: Cards.Card[], player: Cards.Card[], expectedOuts: Cards.Card[]) => {
     let remaining = R.difference(getNewDeck(), community.concat(player))
     let outs = getOuts({community, player, remaining})
     expect(outs).to.have.deep.members(expectedOuts)

@@ -2,14 +2,15 @@ import * as React from 'react';
 import * as R from 'ramda';
 import { evaluate } from '../../../lib/poker/evaluator';
 import HandsForm from '../HandsForm';
+import * as Cards from '../../../lib/cards/cards';
 
 interface Props {
-  cards: Cards;
+  cards: Cards.Table;
   next: Function;
 }
 
 interface State {
-  guess?: HandRank;
+  guess?: Cards.HandRank;
   showAnswer: boolean;
   showNotice: boolean;
 }
@@ -35,7 +36,7 @@ export default class HandReadingComponent extends React.Component<
     }
   }
 
-  check = (guess: HandRank) => {
+  check = (guess: Cards.HandRank) => {
     this.setState(prev => R.merge(prev, { showAnswer: true, guess: guess }));
   }
 

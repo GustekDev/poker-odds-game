@@ -1,13 +1,14 @@
 import * as React from 'react';
+import * as Cards from '../cards/cards';
 
 import { displayCards, displayCommnityCards } from './cards';
 
 interface Props {
-    community: Card[];
-    player: Card[];
+    community: Cards.Card[];
+    player: Cards.Card[];
 }
 
-export default class Table extends React.Component<Props, null> {
+export default class Table extends React.Component<Props, {}> {
 
     render() {
         return (

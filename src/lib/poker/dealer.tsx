@@ -1,24 +1,7 @@
 import { evaluate, getHandRank } from './evaluator';
+import * as Cards from '../cards/cards';
 
-const suits: CardSuit[] = ['H', 'D', 'C', 'S'];
-const ranks: CardRank[] = [
-  '2',
-  '3',
-  '4',
-  '5',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  'T',
-  'J',
-  'Q',
-  'K',
-  'A'
-];
-
-export const dealCards = (turn: GameTurn): Cards => {
+export const dealCards = (turn: Cards.GameTurn): Cards.Table => {
   let cards = shuffle(getNewDeck());
   var communityCount = 3;
   switch (turn) {
@@ -41,12 +24,12 @@ export const dealCards = (turn: GameTurn): Cards => {
   };
 };
 
-export const dealUnfairCards = (turn: GameTurn): Cards => {
+export const dealUnfairCards = (turn: Cards.GameTurn): Cards.Table => {
   var cards = dealCards(turn);
   var attempt = 0;
   while (
     evaluate(cards.community.concat(cards.player)).handRank ===
-      getHandRank('High Card') &&
+    getHandRank('High Card') &&
     attempt < 10
   ) {
     cards = dealCards(turn);
@@ -55,17 +38,17 @@ export const dealUnfairCards = (turn: GameTurn): Cards => {
   return cards;
 };
 
-export const getNewDeck = (): Card[] => {
-  let cards: Card[] = [];
-  for (let suit of suits) {
-    for (let rank of ranks) {
+export const getNewDeck = (): Cards.Deck => {
+  let cards: Cards.Card[] = [];
+  for (var rank = Cards.Rank.Two; rank <= Cards.Rank.Ace; rank++) {
+    for (var suit = Cards.Suit.Spades; suit <= Cards.Suit.Hearts; suit++) {
       cards.push({ suit, rank });
     }
   }
   return cards;
 };
 
-const shuffle = (cards: Card[]) => {
+const shuffle = (cards: Cards.Deck) => {
   var currentIndex = cards.length,
     temporaryValue,
     randomIndex;

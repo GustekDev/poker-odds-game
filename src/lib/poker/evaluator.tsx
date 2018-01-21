@@ -1,17 +1,18 @@
 import { Hand } from 'pokersolver';
 import { shortCard } from './cards';
+import * as Cards from '../cards/cards';
 
-export const evaluate = (cards: Card[]): PokerHand => {
+export const evaluate = (cards: Cards.Card[]): Cards.PokerHand => {
     let hand: SolverHand = Hand.solve(cards.map(shortCard));
     return {
-        name: hand.name as HandRank,
+        name: hand.name as Cards.HandRank,
         description: hand.descr,
         rank: hand.rank,
-        handRank: getHandRank(hand.name as HandRank)
+        handRank: getHandRank(hand.name as Cards.HandRank)
     };
 };
 
-export const getHandRank = (name: HandRank): number => {
+export const getHandRank = (name:Cards.HandRank): number => {
     switch (name) {
         case 'Straight Flush': return 8;
         case 'Four of a Kind': return 7;

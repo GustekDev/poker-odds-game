@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Route, NavLink, Link, match } from 'react-router-dom';
 import PracticeComponent from './game/components/practice/PracticeComponent';
+import * as Cards from './lib/cards/cards';
 
 const navbarInstance = (
   <nav className="navbar navbar-expand-md navbar-dark bg-dark">
@@ -17,12 +18,12 @@ interface PracticeRouteParams {
 }
 
 interface PracticeParams {
-  game: GameName;
+  game: Cards.GameName;
 }
 
 const Practice = (params: PracticeRouteParams) => <PracticeComponent game={params.match.params.game} />;
 
-class App extends React.Component<{}, null> {
+class App extends React.Component<{}, {}> {
   render() {
     return (
       <div>  

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as R from 'ramda';
 import { getOuts } from '../../../lib/poker/outs';
+import * as Cards from '../../../lib/cards/cards';
 
 interface Props {
-    cards: Cards;
+    cards: Cards.Table;
     next: Function;
 }
 
