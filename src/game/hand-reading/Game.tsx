@@ -1,8 +1,8 @@
 import { dealUnfairCards } from '../../lib/poker/dealer';
 import { evaluate } from '../../lib/poker/evaluator';
-import * as Cards from '../../lib/cards/cards';
+import * as Game from '../../lib/poker/game';
 
-export default function getRound(turn: Cards.GameTurn): Cards.HandRound {
+export default function getRound(turn: Game.GameTurn): Game.HandRound {
     let cards = dealUnfairCards(turn);
     return {
         game: 'hand-reading',

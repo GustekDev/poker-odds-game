@@ -3,15 +3,16 @@ import * as R from 'ramda';
 import { dealCards } from '../../lib/poker/dealer';
 import Table from '../../lib/poker/Table';
 import * as Cards from '../../lib/cards/cards';
+import * as Game from '../../lib/poker/game';
 
 interface Props {
 
 }
 
 interface State {
-    gameTurn: Cards.GameTurn;
+    gameTurn: Game.GameTurn;
     cards: Cards.Table;
-    rank?: Cards.PokerHand;
+    rank?: Game.PokerHand;
 }
 
 export default class GameComponent extends React.Component<Props, State> {
@@ -31,14 +32,14 @@ export default class GameComponent extends React.Component<Props, State> {
         });
     }
 
-    setTurn(turn: Cards.GameTurn) {
+    setTurn(turn: Game.GameTurn) {
         this.setState((prev: State) => {
             return R.merge(prev, { gameTurn: turn });
         });
     }
 
-    renderTurnRadios(curr: Cards.GameTurn): JSX.Element[] {
-        let turns: Cards.GameTurn[] = [ 'Flop', 'Turn', 'River'];
+    renderTurnRadios(curr: Game.GameTurn): JSX.Element[] {
+        let turns: Game.GameTurn[] = [ 'Flop', 'Turn', 'River'];
         return turns.map((turn) => {
             return (
                 <label>

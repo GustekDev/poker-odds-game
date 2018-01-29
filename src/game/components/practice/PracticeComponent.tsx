@@ -5,13 +5,14 @@ import HandReadingComponent from './HandReadingComponent';
 import Table from '../../../lib/poker/Table';
 import { dealUnfairCards } from '../../../lib/poker/dealer';
 import * as Cards from '../../../lib/cards/cards';
+import * as Game from '../../../lib/poker/game';
 
 interface Props {
-    game: Cards.GameName;
+    game: Game.GameName;
 }
 
 interface State {
-    gameTurn: Cards.GameTurn;
+    gameTurn: Game.GameTurn;
     cards: Cards.Table;
 }
 
@@ -31,7 +32,7 @@ export default class PracticeComponent extends React.Component<Props, State> {
         );
     }
 
-    renderGame(game: Cards.GameName) {
+    renderGame(game: Game.GameName) {
         switch (game) {
             case 'hand-reading': return (<HandReadingComponent cards={this.state.cards} next={() => this.next()} />);
             case 'outs-counting': return (<OutsComponent cards={this.state.cards} next={() => this.next()} />);

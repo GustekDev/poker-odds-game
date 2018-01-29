@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Cards from '../../lib/cards/cards';
+import * as Game from '../../lib/poker/game';
 
 interface Props {
     answer: Function;
@@ -22,7 +22,7 @@ export default class AnswerForm extends React.Component<Props, null> {
     render() {
         return (
             <div>
-                {allRanks.map((hr: Cards.HandRank) =>
+                {allRanks.map((hr: Game.HandRank) =>
                     (<button onClick={() => this.props.answer(hr)}>{hr}</button>))
                 }
             </div>

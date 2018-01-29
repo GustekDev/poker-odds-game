@@ -1,7 +1,7 @@
 import * as React from 'react';
-import * as Cards from '../../lib/cards/cards';
+import * as Game from '../../lib/poker/game';
 
-export default class SettingsForm extends React.Component<any, Cards.GameSettings> {
+export default class SettingsForm extends React.Component<any, Game.GameSettings> {
 
     constructor(props: any) {
         super(props);
