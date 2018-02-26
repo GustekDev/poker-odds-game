@@ -42,7 +42,7 @@ export default class GameComponent extends React.Component<Props, State> {
         let turns: Game.GameTurn[] = [ 'Flop', 'Turn', 'River'];
         return turns.map((turn) => {
             return (
-                <label>
+                <label key="turn-label">
                     <input
                         type="radio"
                         name="turn"

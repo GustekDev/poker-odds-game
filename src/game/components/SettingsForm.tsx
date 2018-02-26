@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as Game from '../../lib/poker/game';
 
-export default class SettingsForm extends React.Component<any, Game.GameSettings> {
+export default class SettingsForm extends React.Component<{}, Game.GameSettings> {
 
-    constructor(props: any) {
+    constructor(props: {}) {
         super(props);
         this.state = {
             turn: 'Flop',

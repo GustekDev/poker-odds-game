@@ -51,7 +51,6 @@ export default class PracticeBoard extends React.Component<Props, State> {
     }
 
     render() {
-        console.log(this.state.guess);
         return (
             <div>
                 {this.state.guess !== undefined
