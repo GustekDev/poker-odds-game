@@ -16,10 +16,7 @@ interface State {
   showNotice: boolean;
 }
 
-export default class HandReadingComponent extends React.Component<
-  Props,
-  State
-> {
+export default class HandReadingComponent extends React.Component<Props, State> {
   private initState: State = {
     showAnswer: false,
     showNotice: false,
