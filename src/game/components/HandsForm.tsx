@@ -1,8 +1,11 @@
 import * as React from 'react';
 import * as Game from '../../lib/poker/game';
+import * as classNames from 'classnames';
 
 interface Props {
-  answer: Function;
+  onClick: Function;
+  correct: Game.HandRank;
+  selected?: Game.HandRank;
 }
 
 const ranksRow1: Game.HandRank[] = ['High Card', 'Pair', 'Two Pair'];
@@ -16,12 +19,26 @@ const ranksRow3: Game.HandRank[] = [
 ];
 
 export default class HandsForm extends React.Component<Props, {}> {
+
+  renderButton = (hr: Game.HandRank) => {
+    let styles = classNames({
+      'correct': this.props.selected && this.props.correct === hr,
+      'incorrect': this.props.selected && this.props.correct !== this.props.selected && this.props.selected === hr
+    });
+    return (
+      <button 
+        onClick={() => this.props.onClick(hr)}
+        className={styles}
+      >
+        {hr}
+      </button>
+    );
+  }
+
   renderRow(ranks: Game.HandRank[]) {
     return (
       <div>
-        {ranks.map(hr => (
-          <button onClick={() => this.props.answer(hr)}>{hr}</button>
-        ))}
+        {ranks.map(this.renderButton)}
       </div>
     );
   }

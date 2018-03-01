@@ -36,6 +36,10 @@ export default class PracticeBoard extends React.Component<Props, State> {
     check = (guess: Game.HandRank) => {
         this.setState((prev) => R.merge(prev, { showAnswer: true, guess: guess }));
     }
+    
+    answer = () => evaluate(
+      this.props.cards.community.concat(this.props.cards.player)
+    ).name
 
     renderAnswer = (state: State) => {
         if (state.showAnswer) {
@@ -54,8 +58,8 @@ export default class PracticeBoard extends React.Component<Props, State> {
         return (
             <div>
                 {this.state.guess !== undefined
-                ? <button onClick={() => this.props.next()}>Next</button>
-                : <HandsForm answer={this.check} />}
+          ? <HandsForm onClick={this.props.next} correct={this.answer()} />
+          : <HandsForm onClick={this.check} correct={this.answer()} />}
                 {this.renderAnswer(this.state)}
             </div>
         );
