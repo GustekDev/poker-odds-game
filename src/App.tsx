@@ -30,8 +30,12 @@ class App extends React.Component<{}, {}> {
       {navbarInstance}
         <main className="container" role="main">
           <Route exact={true} path="/" render={() => <div>Hello</div>} />
-          // tslint:disable-next-line:no-any
-          <Route exact={true} path="/practice/:game" component={(props: any) => Practice(props)} />
+          <Route 
+            exact={true} 
+            path="/practice/:game" 
+            // tslint:disable-next-line:no-any
+            component={(props: any) => Practice(props)} 
+          />
         </main>
       </div>
     );
